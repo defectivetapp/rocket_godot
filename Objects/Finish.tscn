@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://df00mndigansb"]
+
+[ext_resource type="AudioStream" uid="uid://cd8s37t88bl6n" path="res://Sounds/finish-sharedassets0.assets-16.wav" id="1_rp0x1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwwx0"]
+albedo_color = Color(0.243137, 1, 0.498039, 1)
+emission = Color(0, 0.670588, 0.164706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7npy5"]
+material = SubResource("StandardMaterial3D_bwwx0")
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wisln"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="Gradient" id="Gradient_q07lq"]
+colors = PackedColorArray(1.13107e-06, 0.634216, 9.62615e-07, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iedmd"]
+gradient = SubResource("Gradient_q07lq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qcj2w"]
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 41.65
+radial_accel_max = 43.9
+angle_max = 45.5
+scale_min = 0.5
+color_initial_ramp = SubResource("GradientTexture1D_iedmd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vck4"]
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_rs2in"]
+material = SubResource("StandardMaterial3D_6vck4")
+
+[node name="Finish" type="StaticBody3D" groups=["Finish"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_7npy5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_wisln")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 183
+lifetime = 0.55
+one_shot = true
+visibility_aabb = AABB(-1.08727, -1.15226, -1.39432, 2.17454, 2.30453, 2.78864)
+process_material = SubResource("ParticleProcessMaterial_qcj2w")
+draw_pass_1 = SubResource("QuadMesh_rs2in")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_rp0x1")

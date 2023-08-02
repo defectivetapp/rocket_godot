@@ -1,0 +1,180 @@
+[gd_scene load_steps=24 format=3 uid="uid://6poasdyrtm0p"]
+
+[ext_resource type="Script" path="res://Scripts/rocket.gd" id="1_cgpvh"]
+[ext_resource type="AudioStream" uid="uid://d4jybjvj4q2en" path="res://Sounds/RocketFly-sharedassets0.assets-14.wav" id="2_r3db0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_igks3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a66k"]
+metallic = 0.1
+metallic_specular = 0.0
+roughness = 0.65
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8ns80"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxpil"]
+albedo_color = Color(1, 0.137255, 0.137255, 1)
+metallic = 0.15
+metallic_specular = 0.46
+roughness = 0.35
+
+[sub_resource type="SphereMesh" id="SphereMesh_tincb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yik8f"]
+albedo_color = Color(0.207843, 0.211765, 1, 1)
+metallic = 0.15
+metallic_specular = 0.48
+roughness = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ymorg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev3u5"]
+margin = 0.0
+radius = 0.42
+height = 2.23
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tdkry"]
+radius = 0.2
+height = 0.81
+
+[sub_resource type="Gradient" id="Gradient_geyso"]
+colors = PackedColorArray(0.529067, 0.529067, 0.529067, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p0xxo"]
+gradient = SubResource("Gradient_geyso")
+
+[sub_resource type="Curve" id="Curve_yb2gc"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, -200), 0.0, 0.0, 0, 0, Vector2(1, 200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_opcno"]
+curve = SubResource("Curve_yb2gc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c0dkn"]
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 0.56
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -0.35
+linear_accel_curve = SubResource("CurveTexture_opcno")
+color_ramp = SubResource("GradientTexture1D_p0xxo")
+hue_variation_min = -0.11
+hue_variation_max = 0.32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6dav"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.611765, 0.333333, 1)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_uxnu3"]
+material = SubResource("StandardMaterial3D_e6dav")
+size = Vector2(0.175, 0.18)
+
+[sub_resource type="Gradient" id="Gradient_kb2ab"]
+colors = PackedColorArray(0.88802, 0.854514, 0.823171, 1, 0.968627, 0.552941, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d0rjw"]
+gradient = SubResource("Gradient_kb2ab")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrorq"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+angular_velocity_max = 3.1
+radial_accel_min = 86.4
+radial_accel_max = 86.4
+angle_max = 45.0
+scale_min = 0.5
+color_initial_ramp = SubResource("GradientTexture1D_d0rjw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wojj2"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_a0d7n"]
+material = SubResource("StandardMaterial3D_wojj2")
+size = Vector2(0.25, 0.25)
+
+[node name="Rocket" type="RigidBody3D"]
+inertia = Vector3(0, 0, 1000)
+gravity_scale = 0.3
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_cgpvh")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.801304, 0, 0, 0, 1.09461, 0, 0, 0, 0.761855, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_igks3")
+surface_material_override/0 = SubResource("StandardMaterial3D_3a66k")
+
+[node name="LeftLeg" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.466799, 0, 0, 0, 0.351986, 0, 0, 0, 0.565829, 0.559534, -0.918368, 0)
+mesh = SubResource("CapsuleMesh_8ns80")
+surface_material_override/0 = SubResource("StandardMaterial3D_uxpil")
+
+[node name="RightLeg" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.466799, 0, 0, 0, 0.351986, 0, 0, 0, 0.565829, -0.56, -0.918, 0)
+mesh = SubResource("CapsuleMesh_8ns80")
+surface_material_override/0 = SubResource("StandardMaterial3D_uxpil")
+metadata/_edit_group_ = true
+
+[node name="Window1" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.352873, 0, 0, 0, 0.25012, 0, 0, 0, 0.334419, 0, 0.563271, 0.432792)
+mesh = SubResource("SphereMesh_tincb")
+surface_material_override/0 = SubResource("StandardMaterial3D_yik8f")
+
+[node name="Window3" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.352873, 0, 0, 0, 0.25012, 0, 0, 0, 0.334419, 0, -0.256768, 0.432792)
+mesh = SubResource("SphereMesh_tincb")
+surface_material_override/0 = SubResource("StandardMaterial3D_yik8f")
+
+[node name="Window2" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.37637, 0, 0, 0, 0.266775, 0, 0, 0, 0.334419, 0, 0.153729, 0.432792)
+mesh = SubResource("SphereMesh_tincb")
+surface_material_override/0 = SubResource("StandardMaterial3D_yik8f")
+
+[node name="Antenn" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(-0.0478085, 0, 0, 0, 1, 0, 0, 0, -0.0478085, 0, 0.576775, 0)
+mesh = SubResource("CapsuleMesh_ymorg")
+surface_material_override/0 = SubResource("StandardMaterial3D_uxpil")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
+shape = SubResource("CapsuleShape3D_ev3u5")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -1.02, 0)
+shape = SubResource("CapsuleShape3D_tdkry")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.460742, -1.02, 0)
+shape = SubResource("CapsuleShape3D_tdkry")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.40776, 0)
+cast_shadow = 0
+emitting = false
+amount = 28
+lifetime = 0.6
+visibility_aabb = AABB(-0.424026, -0.287218, -0.244099, 0.848052, 0.574436, 0.488197)
+trail_lifetime = 3.15
+process_material = SubResource("ParticleProcessMaterial_c0dkn")
+draw_pass_1 = SubResource("QuadMesh_uxnu3")
+
+[node name="Explosion" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+amount = 663
+lifetime = 0.28
+one_shot = true
+explosiveness = 0.52
+visibility_aabb = AABB(-0.864598, -1.03511, -0.966979, 1.7292, 2.07022, 1.93396)
+process_material = SubResource("ParticleProcessMaterial_hrorq")
+draw_pass_1 = SubResource("QuadMesh_a0d7n")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_r3db0")
+max_polyphony = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

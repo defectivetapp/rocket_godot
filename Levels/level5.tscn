@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0oshxoluhjhn"]
+
+[ext_resource type="Script" path="res://Scripts/test_level.gd" id="1_y5cdh"]
+[ext_resource type="PackedScene" uid="uid://6poasdyrtm0p" path="res://Objects/rocket.tscn" id="2_1anut"]
+[ext_resource type="PackedScene" uid="uid://bqpcc1jvuj8l3" path="res://Objects/Obstacle.tscn" id="3_mm7c7"]
+[ext_resource type="Script" path="res://Levels/Level5.gd" id="4_as6xy"]
+[ext_resource type="PackedScene" uid="uid://c3ebssy1mkk8t" path="res://Objects/Start.tscn" id="5_thcbp"]
+[ext_resource type="PackedScene" uid="uid://df00mndigansb" path="res://Objects/Finish.tscn" id="6_thf1s"]
+[ext_resource type="AudioStream" uid="uid://enc73mhllg1o" path="res://Sounds/Music-sharedassets0.assets-17.wav" id="7_p3dsj"]
+[ext_resource type="PackedScene" uid="uid://bav704e6i4prg" path="res://Objects/world_environment.tscn" id="8_q287n"]
+
+[node name="LevelScene" type="Node3D"]
+script = ExtResource("1_y5cdh")
+next_scene_path = "res://Levels/level6.tscn"
+
+[node name="Rocket" parent="." instance=ExtResource("2_1anut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2147, -6.59277, -1.80124)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0863185, 0, 0, 0, 0.0841062, 0.0194174, 0, -0.0194174, 0.0841062, 4.285, 3.22, 11.529)
+
+[node name="DirectionalLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.50822, -0.387606, 0.769073, 0.0109868, 0.895842, 0.444236, -0.861157, -0.21732, 0.459544, 11.1495, 6.77535, 13.0323)
+light_color = Color(0.776471, 0.913725, 0.831373, 1)
+light_energy = 13.457
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.55
+shadow_normal_bias = 0.0
+shadow_opacity = 0.8
+shadow_blur = 2.55
+omni_range = 78.039
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.95083, 0.128157, -0.281955, 0.0109868, 0.895842, 0.444236, 0.309519, -0.425491, 0.850385, -5.33673, 10.3443, 11.8605)
+light_color = Color(0.690196, 0.482353, 0.694118, 1)
+light_energy = 0.59
+light_indirect_energy = 0.645
+shadow_enabled = true
+shadow_opacity = 0.6
+directional_shadow_mode = 0
+directional_shadow_blend_splits = true
+
+[node name="LeftWall" parent="." instance=ExtResource("3_mm7c7")]
+transform = Transform3D(1, 0, 0, 0, 84.495, 0, 0, 0, 3.685, -15.69, -1.35, -1.69)
+color = Color(0.45098, 0.835294, 0.831373, 1)
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("4_as6xy")
+
+[node name="Obstacle1" parent="Node3D" instance=ExtResource("3_mm7c7")]
+transform = Transform3D(2.94105, 0, 0, 0, 66.21, 0, 0, 0, 3.685, 1.30738, -12.0884, -1.99361)
+color = Color(1, 0.552941, 0.568627, 1)
+
+[node name="Obstacle2" parent="Node3D" instance=ExtResource("3_mm7c7")]
+transform = Transform3D(2.89267, 0, 0, 0, 66.21, 0, 0, 0, 3.685, 1.29977, 10.2751, -1.99361)
+color = Color(1, 0.552941, 0.568627, 1)
+
+[node name="Obstacle3" parent="Node3D" instance=ExtResource("3_mm7c7")]
+transform = Transform3D(9.31247, -1.39051, 0.182684, 1.0365, 10.2938, -2.35766, 0.262709, 8.67719, 2.82618, 9.88739, -11.3594, -2.59135)
+color = Color(0.4, 0.756863, 0.898039, 1)
+
+[node name="Obstacle4" parent="Node3D" instance=ExtResource("3_mm7c7")]
+transform = Transform3D(3.03149, -6.23157, 0, 1.65736, 11.3982, 0, 0, 0, 3.685, -3.88292, -10.1632, -1.43017)
+color = Color(0.4, 0.756863, 0.898039, 1)
+
+[node name="RightWall" parent="." instance=ExtResource("3_mm7c7")]
+transform = Transform3D(1, 0, 0, 0, 80.045, 0, 0, 0, 3.685, 24.228, -0.83, -1.69)
+color = Color(0.45098, 0.835294, 0.831373, 1)
+
+[node name="Floor" parent="." instance=ExtResource("3_mm7c7")]
+transform = Transform3D(-4.37114e-08, -174.47, 0, 1, -7.62633e-06, 0, 0, 0, 3.685, 4.808, -11.343, -1.69)
+color = Color(0.415686, 0.831373, 0.909804, 1)
+
+[node name="Ceiling" parent="." instance=ExtResource("3_mm7c7")]
+transform = Transform3D(-4.37114e-08, -174.47, 0, 1, -7.62633e-06, 0, 0, 0, 3.685, 4.80766, 10.4257, -1.69)
+
+[node name="BackWall" parent="." instance=ExtResource("3_mm7c7")]
+transform = Transform3D(43.734, 0, 0, 0, 86.232, 0, 0, 0, 0.459, 2.53158, -1.37112, -3.17)
+color = Color(0.45098, 0.835294, 0.831373, 1)
+
+[node name="StartObstacle" parent="." instance=ExtResource("3_mm7c7")]
+transform = Transform3D(5.44342, 0, 0, 0, 18.5669, 0, 0, 0, 2.65412, -10.6692, -10.715, -1.18753)
+
+[node name="FinishObstacle" parent="." instance=ExtResource("3_mm7c7")]
+transform = Transform3D(5.44342, 0, 0, 0, 18.5669, 0, 0, 0, 2.65412, 21.1854, -10.715, -1.18753)
+
+[node name="Start" parent="." instance=ExtResource("5_thcbp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.081, -7.99858, -1.80135)
+
+[node name="Finish" parent="." instance=ExtResource("6_thf1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8025, -8.20844, -1.57883)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_p3dsj")
+volume_db = -10.0
+autoplay = true
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("8_q287n")]
+
+[connection signal="body_entered" from="Rocket" to="." method="_on_rocket_body_entered"]

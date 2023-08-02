@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bav704e6i4prg"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ftndw"]
+
+[sub_resource type="Sky" id="Sky_1b8f1"]
+sky_material = SubResource("PhysicalSkyMaterial_ftndw")
+
+[sub_resource type="Environment" id="Environment_csynw"]
+background_mode = 2
+background_energy_multiplier = 3.48
+sky = SubResource("Sky_1b8f1")
+sky_custom_fov = 147.0
+ambient_light_color = Color(0.384314, 0.701961, 1, 1)
+ambient_light_energy = 1.95
+reflected_light_source = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_csynw")
